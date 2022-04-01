@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="style.css" rel="stylesheet">
+  
 </head>
 <body>
   
@@ -13,49 +14,49 @@
   </header>
   
   <div class="row">
-      <aside class="col-2 col-s-12">
-          <button>Add user</button>
+      <aside class="col-4 col-s-12">
+          <!--<button id="open-from">Open from</button>-->
+
+          <div class="container">
+            <form>
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" name="firstname" placeholder="Your name..">
+          
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+          
+              <label for="pnumber">Phone number</label>
+              <input type="text" id="pnumber" name="pnumber" placeholder="Phone number">
+        
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" placeholder="E-mail">
+            </form>
+            <button id="add-user">Add user</button>
+          </div>
+
       </aside>
+      
 
-    <article class="col-10 col-s-12">
-
-        <table id="participant-table">
+    <article class="col-8 col-s-12">
+        <table id="contact-table">
             <tr>
-                <th></th>
+                <th>Icon</th>
                 <th>Name</th>
                 <th>Number</th>
-                
-            </tr>
-            <tr>
-                <td class="icon-letter">
-                    <svg height="100" width="100">
-                        <circle cx="50" cy="50" r="30" fill="blue"/>
-                        <text x="40" y="60" fill="white" class="heavy">J</text>
-                    </svg>
-                </td>
-                <td>Janez Novak</td>
-                <td>+385 51 790 630</td>
+                <th>E-mail</th>
             </tr>
         </table>
-    
-    
-
     </article>
   
-    <!--<aside class="col-3 col-s-12">
-      <h2>Flexible layouts</h2>
-      <p>Layout should be a flexible grid that dynamically resizes to any width.</p>
-      <h2>Media Queries</h2>
-      <p>Media queries allow defining different styles for different browser and device configurations.
-      </p>
-      <h2>Flexible Media</h2>
-      <p>Images, videos, and other media types should also be dynamically resizable.</p>
-    </aside>
+    
   </div>
--->
+  
+
   <footer class="col-12 col-s-12">
-    <p>Some footer text.</p>
+    <a href="./viri.html" target="_">Viri</a>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
 
