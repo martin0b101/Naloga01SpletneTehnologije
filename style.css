@@ -42,12 +42,32 @@ tr{
 }
 tr:hover{
   background-color: #e3e1df;
-  
+}
+
+td{
+  padding: 5px;
 }
 
 .icon-letter{
     font: bold 30px sans-serif; 
 }
+
+#search{
+  width: 50%;
+  border-radius: 20px;
+  border: none;
+}
+
+
+/*input checkbox*/
+input[type=checkbox] {
+  width: 15px;
+  height: 15px;
+  margin: auto;
+}
+ 
+
+
 .contact-users{
   background-color: black;
 }
@@ -60,7 +80,7 @@ button{
   color: white;
   padding: 12px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
   cursor: pointer;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
                 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -75,7 +95,7 @@ input[type=text], select, input[type=email] {
   width: 100%; /* Full width */
   padding: 12px; /* Some padding */ 
   border: 1px solid #ccc; /* Gray border */
-  border-radius: 4px; /* Rounded borders */
+  border-radius: 20px; /* Rounded borders */
   box-sizing: border-box; /* Make sure that padding and width stays in place */
   margin-top: 6px; /* Add a top margin */
   margin-bottom: 16px; /* Bottom margin */
@@ -100,7 +120,8 @@ label{
     text-align: center;
     font-size: 12px;
     margin: auto;
-    position: fixed;
+    position: relative;
+    right: 0;
     left: 0;
     width: 100%;
     bottom: 0;
