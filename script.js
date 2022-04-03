@@ -3,6 +3,7 @@
 let arrayOfElements = [];
 let id = 1;
 
+
 function deleteUser(event){
 
 
@@ -10,7 +11,10 @@ function deleteUser(event){
     //load local storage tabel
     const localStorageTable = JSON.parse(localStorage.getItem("contacts"));
 
-    for (let i = 0; i < arrayOfElements.length; i++) {
+    
+
+    let i;
+    for (i = 0; i < arrayOfElements.length; i++) {
         let checkBoxIsChecked = document.getElementById(arrayOfElements[i]);
         if (checkBoxIsChecked.checked) {
 
@@ -19,25 +23,24 @@ function deleteUser(event){
             // get element of this id and remove it from table in html
             let tr = checkBoxIsChecked.closest("tr");
             const numberOfPerson = tr.childNodes[2].innerText;
-            console.log(numberOfPerson);
-
             
             for (let j = 0; j < localStorageTable.length; j++) {
                 if (numberOfPerson == localStorageTable[j].phonenumber) {
                     localStorageTable.splice(j, 1);
-                    console.log(localStorageTable);
                 }
-                
             }
             //local storage update deleted pearson
             localStorage.setItem("contacts", JSON.stringify(localStorageTable));
 
             tr.remove(); //remove element from html
-            arrayOfElements.splice(i, 1); //remove elemt from array   
+            console.log("Before delete " + arrayOfElements);
+            arrayOfElements.splice(i, 1); //remove elemt from array
+            console.log("After delete " + arrayOfElements);
+            i = -1;   
         }
     }
     if (!checkedPearson) {
-        alert("Please select pearson you want to delete!");
+        alert("Please select a contact you want to delete!");
     }
     if (!arrayOfElements.length) {
         id = 1;
@@ -48,8 +51,9 @@ function deleteUser(event){
 function domAddClient(clientObject){
     const table = document.querySelector("#contact-table");
     const tr = document.createElement("tr");
-    // add tr to table
+    //add dragable attribute
     tr.setAttribute("draggable", true);
+    //add tr atribut id to find it
     table.appendChild(tr);
    
 
@@ -60,11 +64,7 @@ function domAddClient(clientObject){
             td.className = "icon-letter";
             td.innerText = clientObject[key];
             tr.appendChild(td);
-            /*
-            td.appendChild(svg);
-            svg.appendChild(circle);
-            text.innerText = clientObject[key];
-            svg.appendChild(text);*/
+            
         }else{
             td.innerText = clientObject[key];
             tr.appendChild(td);
@@ -94,11 +94,11 @@ function checkValidEmail(email){
 
 function checkIfEmpty(fname, lname, pnumber){
     if (fname == "") {
-        alert("Please input first name");
+        alert("Please input first name!");
     }else if (lname == ""){
-        alert("Please input last name");
+        alert("Please input last name!");
     }else if (pnumber == ""){
-        alert("Please input phone number");
+        alert("Please input phone number!");
     }else{
         return true;
     }
@@ -114,22 +114,35 @@ function checkNumberIsValid(pnumber){
 }
 
 
+function checkIfNumberExist(phoneNumber){
+    //pogledam ce local strogae prazen
+    if (localStorage.getItem("contacts") == null) {
+        return false;
+    }
+    else{
+        // nalozim podatek v tabelo
+        const localStorageTable = JSON.parse(localStorage.getItem("contacts"));
+        for (let i = 0; i < localStorageTable.length; i++) {
+            if (localStorageTable[i].phonenumber == phoneNumber) {
+                return true;
+            }
+        }   
+    }
+    return false;
+}
+
+
 function addUser(event){
     const fname = document.querySelector("#fname").value;
     const lname = document.querySelector("#lname").value;
     const pnumber = document.querySelector("#pnumber").value;
     const email = document.querySelector("#email").value;
 
-
-    let labelFname = document.getElementById("fnameL");
-    //check if empty 
-    if (fname == "") {
-        labelFname.style.color = "red";
+    //check if number exist
+    if (checkIfNumberExist(pnumber)) {
+        alert("Phone number already exist!");
         return;
-    }else{
-        labelFname.style.color = "black";
     }
-    
     
     //remove input
     document.querySelector("#fname").value = "";
@@ -143,6 +156,7 @@ function addUser(event){
     } catch (error) {
         if (fname == "") {
             alert(error+" Please input first name!");
+            return;
         }
     }
     
@@ -188,9 +202,10 @@ function searchOfElements(event){
 
     // loop thorug table and hide all wrong
     for (let i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[1]; //search throug names
+        td = tr[i].getElementsByTagName("td")[1]; //search names
         if (td) {
             txtValue = td.textContent || td.innerText;
+            // ce obstaja filter v txtValue bo index vecji od -1 
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
             }else{
@@ -201,12 +216,40 @@ function searchOfElements(event){
     }
 }
 
-function dragStart(event){
-    console.log(event.innerHTML);
-}
 
-function dragStop(event){
-    console.log(event.innerHTML);
+function sort(event){
+    let table, rows, switching, i, x, y, shouldSwitch;
+    table = document.querySelector("#contact-table");
+    switching = true;
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+        // Start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /* Loop through all table rows (except the
+        first, which contains table headers): */
+        for (i = 1; i < (rows.length - 1); i++) {
+            // Start by saying there should be no switching:
+            shouldSwitch = false;
+            /* Get the two elements you want to compare,
+            one from current row and one from the next: */
+            x = rows[i].getElementsByTagName("TD")[1];
+            y = rows[i + 1].getElementsByTagName("TD")[1];
+            // Check if the two rows should switch place:
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            // If so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+        }
+        }
+        if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark that a switch has been done: */
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+        }
+    }
 }
 
 
@@ -225,8 +268,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }   
     }
 
-
-    //drag and drop
-    //todo
+    //sort 
+    document.getElementById("sort").addEventListener("click", sort);
+    
 
 })

@@ -1,7 +1,11 @@
 /* Some CSS to make the page prettier; not relevant to RWD */
 html {
     font-family: sans-serif;
+    height: 100%;
   }
+body {
+  height: 100%;
+}
   
 header {
   background-color: #171717;
@@ -31,10 +35,13 @@ td {
 
 
 th {
+  font-size: 14px;
 	text-align: left;
   background-color: white;
   border-bottom: 1px solid rgba(0,0,0,0.12);;
   color: #5f6368;
+  font-weight: normal;
+  padding-bottom: 10px;
   
 }
 tr{
@@ -44,12 +51,15 @@ tr:hover{
   background-color: #e3e1df;
 }
 
+
 td{
-  padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .icon-letter{
-    font: bold 30px sans-serif; 
+  color:black;
+  font: bold 30px sans-serif; 
 }
 
 #search{
@@ -57,6 +67,8 @@ td{
   border-radius: 20px;
   border: none;
 }
+
+/*button for sort*/
 
 
 /*input checkbox*/
@@ -71,9 +83,7 @@ input[type=checkbox] {
 .contact-users{
   background-color: black;
 }
-.participant-table{
-  border-bottom: 1px solid black;
-}
+
 
 button{
   background-color: black;
@@ -88,6 +98,22 @@ button{
 button:hover{
   background-color: #5f6368;
 }
+
+#sort{
+  background-color: white;
+  color: #5f6368;
+  border: none;
+  box-shadow: none;
+  
+}
+
+#sort:hover {
+  background-color: black;
+  color: white;
+  border-radius: 20px;
+}
+
+
 /**/
 /*input form*/
 /* Style inputs with type="text", select elements and textareas */
@@ -114,15 +140,17 @@ label{
 }
 /*end input form*/
   
+body > footer{
+  position: sticky;
+  top:100vh;
+}
+
+
   footer {
     background-color: #303134;
     color: #ffffff;
     text-align: center;
     font-size: 12px;
-    margin: auto;
-    position: relative;
-    right: 0;
-    left: 0;
     width: 100%;
     bottom: 0;
     height: 12%;
@@ -139,6 +167,7 @@ label{
   * {
     box-sizing: border-box;
   }
+
   
   .row::after {
     content: "";
@@ -167,6 +196,7 @@ label{
   
   /*for mobile phone*/
   [class*="col-"]{
+    float: left;
   width: 100%;
   }
   
